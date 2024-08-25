@@ -1,0 +1,49 @@
+<form [formGroup]="userForm" (ngSubmit)="submitForm()">
+    <div>
+        <label>Name:</label>
+        <input formControlName="name"
+            [ngClass]="{'error-border': userForm.get('name')?.invalid && (userForm.get('name')?.dirty || userForm.get('name')?.touched)}">
+        <div *ngIf="userForm.get('name')?.invalid && (userForm.get('name')?.dirty || userForm.get('name')?.touched)"
+            class="error">
+            Name is required.
+        </div>
+    </div>
+
+    <div>
+        <label>Email:</label>
+        <input formControlName="gmail" type="email"
+            [ngClass]="{'error-border': userForm.get('gmail')?.invalid && (userForm.get('gmail')?.dirty || userForm.get('gmail')?.touched)}">
+        <div *ngIf="userForm.get('gmail')?.invalid && (userForm.get('gmail')?.dirty || userForm.get('gmail')?.touched)"
+            class="error">
+            <div *ngIf="userForm.get('gmail')?.errors?.['required']">Email is required.</div>
+            <div *ngIf="userForm.get('gmail')?.errors?.['email']">Invalid email format.</div>
+        </div>
+    </div>
+
+    <div>
+        <label>Photo:</label>
+        <input type="file" (change)="onFileChange($event)" id="image" accept=".jpg,.jpeg,.png,.gif">
+        <div *ngIf="photoInvalid" class="error">
+            Invalid file type. Please upload a valid image (JPG, PNG, JPEG, GIF).
+        </div>
+        <div *ngIf="userForm.get('photoname')?.value">
+            <p>Current file: {{ userForm.get('photoname')?.value }}</p>
+        </div>
+        <div *ngIf="userForm.get('photo')?.invalid && (userForm.get('photo')?.dirty || userForm.get('photo')?.touched)"
+            class="error">
+            Date of Birth is required.
+        </div>
+    </div>
+
+    <div>
+        <label>Date of Birth:</label>
+        <input formControlName="dob" type="date"
+            [ngClass]="{'error-border': userForm.get('dob')?.invalid && (userForm.get('dob')?.dirty || userForm.get('dob')?.touched)}">
+        <div *ngIf="userForm.get('dob')?.invalid && (userForm.get('dob')?.dirty || userForm.get('dob')?.touched)"
+            class="error">
+            Date of Birth is required.
+        </div>
+    </div>
+
+    <button type="submit">{{ isEditMode ? 'Update' : 'Submit' }}</button>
+</form>

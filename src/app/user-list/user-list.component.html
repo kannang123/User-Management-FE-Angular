@@ -1,0 +1,41 @@
+<div class="add-user-container">
+    <button (click)="addUser()" class="add-user-button">Add User</button>
+    <button (click)="exportToExcel()" class="add-user-button">Export as Excel</button>
+</div>
+
+<table *ngIf="users.length > 0">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Date of Birth</th>
+            <th>Photo</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users">
+            <td>{{ user.name }}</td>
+            <td>{{ user.gmail }}</td>
+            <td>{{ user.dob | date }}</td>
+            <td>
+                <img *ngIf="user.photo" [src]="'http://localhost:8000/storage/' + user.photo" alt="User Photo"
+                    class="user-photo">
+            </td>
+            <td>
+                <button (click)="editUser(user.id)">Edit</button>
+                <button (click)="deleteUser(user.id)">Delete</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div *ngIf="users.length === 0" class="no-data-message">
+    No data found.
+</div>
+
+<div class="pagination">
+    <button (click)="prevPage()" [disabled]="currentPage <= 1">Previous</button>
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage >= totalPages">Next</button>
+</div>
