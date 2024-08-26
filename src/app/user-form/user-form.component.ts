@@ -70,6 +70,14 @@ export class UserFormComponent implements OnInit {
   }
 
   submitForm(): void {
+      const photoName = this.userForm.get('photoname')?.value;
+      if (photoName) {
+        this.userForm.get('photo')?.clearValidators();
+        this.userForm.get('photo')?.updateValueAndValidity();
+      }else{
+        this.userForm.get('photo')?.setValidators(Validators.required);
+        this.userForm.get('photo')?.updateValueAndValidity();
+      }
     if (this.userForm.invalid || this.photoInvalid) {
       this.userForm.markAllAsTouched();
       return;
