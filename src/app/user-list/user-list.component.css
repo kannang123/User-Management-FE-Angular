@@ -99,6 +99,6 @@ button:disabled {
 .no-data-message {
     text-align: center;
     font-size: 18px;
-    color: #888;
+    color: red;
     margin-top: 20px;
 }
