@@ -1,7 +1,7 @@
 <form [formGroup]="userForm" (ngSubmit)="submitForm()">
     <div>
         <label>Name:</label>
-        <input formControlName="name"
+        <input formControlName="name" type="text"
             [ngClass]="{'error-border': userForm.get('name')?.invalid && (userForm.get('name')?.dirty || userForm.get('name')?.touched)}">
         <div *ngIf="userForm.get('name')?.invalid && (userForm.get('name')?.dirty || userForm.get('name')?.touched)"
             class="error">
