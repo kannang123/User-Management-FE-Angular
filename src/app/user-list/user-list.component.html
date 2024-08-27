@@ -1,6 +1,6 @@
 <div class="add-user-container">
     <button (click)="addUser()" class="add-user-button">Add User</button>
-    <button (click)="exportToExcel()" class="add-user-button">Export as Excel</button>
+    <button [disabled]="users.length === 0" (click)="exportToExcel()" class="add-user-button">Export as Excel</button>
 </div>
 
 <table >
