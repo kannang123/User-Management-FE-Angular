@@ -3,7 +3,7 @@
     <button (click)="exportToExcel()" class="add-user-button">Export as Excel</button>
 </div>
 
-<table *ngIf="users.length > 0">
+<table >
     <thead>
         <tr>
             <th>Name</th>
@@ -13,7 +13,7 @@
             <th>Actions</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody *ngIf="users.length > 0">
         <tr *ngFor="let user of users">
             <td>{{ user.name }}</td>
             <td>{{ user.gmail }}</td>
@@ -28,13 +28,14 @@
             </td>
         </tr>
     </tbody>
+    
 </table>
 
 <div *ngIf="users.length === 0" class="no-data-message">
     No data found.
 </div>
 
-<div class="pagination">
+<div class="pagination" *ngIf="users.length > 0">
     <button (click)="prevPage()" [disabled]="currentPage <= 1">Previous</button>
     <span>Page {{ currentPage }} of {{ totalPages }}</span>
     <button (click)="nextPage()" [disabled]="currentPage >= totalPages">Next</button>
